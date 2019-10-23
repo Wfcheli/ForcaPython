@@ -1,8 +1,20 @@
 class Palavra:
-    def __init__(self):
-        self.palavra = "donamorte"
+    def __init__(self, arquivo):
+        self.arquivo = open(arquivo, 'r', encoding ='utf-8')
+        self.palavras = self.palavras_do_arquivo(self.arquivo)
+        self.palavra = self.sortear(self.palavras)
         self.palavra = self.palavra.upper()
         self.esconder()
+
+    def sortear(self, palavras):
+        from random import choice
+        return choice(palavras)
+    
+    def palavras_do_arquivo(self, arquivo):
+        palavras = []
+        for linha in arquivo:
+            palavras.append(linha.strip().upper())
+        return palavras
 
     def tem_letra(self, letra):
         if letra in self.palavra:
@@ -28,10 +40,10 @@ class Palavra:
 
 
 class Jogo:
-    def __init__(self):
+    def __init__(self, arquivo):
         self.vidas = 6
         self.chutes = 0
-        self.palavra_escondida = Palavra()
+        self.palavra_escondida = Palavra(arquivo)
         self.historico_chutes = []
 
     def chutar(self, letra):
@@ -71,16 +83,18 @@ class Jogo:
 
 
 if __name__ == "__main__":
-    jogo = jogo()
+    jogo = Jogo('palavras.txt')
     while not (jogo.ganhou() and jogo.perdeu()):
         print("------------------------------------------------")
         print(f"Vidas: {jogo.vidas}")
-        print(jogo.palavra_escondida)
+        print(jogo.palavra_escondida.palavra_misterio)
         print(f"Chutes: {jogo.historico_chutes}")
         print("------------------------------------------------")
-        letra - input("Digite uma letra: ")
+        letra = input("Digite uma letra: ")
         jogo.chutar(letra)
         if jogo.ganhou():
             print("Você ficou vivo dessa vez")
         elif jogo.perdeu():
-            print("Chegou a sua hora! HÁhahaHAHAhahá")
+            print("Chegou a sua hora! MuhHÁhahaHAHAhahá")
+            break
+    

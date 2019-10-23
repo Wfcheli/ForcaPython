@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>Jogo Da Forca</title>
+{% endblock head %}
+
+{% block body %}
+    <main>
+        <div class="center">
+            <h1 class="big-h1"> O MAIS TERRÍVEL JOGO DA FORCA</h1>
+            
+            <h2 class="big-h2">DONA MORTE</h2>
+            <a href="{{ url_for('jogar') }}" class="btn-play">
+                <div class="img-caption">
+                    <img src="" alt="Caixão">
+                    <span class="caption">CLIQUE<br>
+                                          PARA<br>
+                                          JOGAR
+                    </span>
+                </div>
+            </a>
+        </div>
+    </main>
+{% endblock body %}
+</html>
