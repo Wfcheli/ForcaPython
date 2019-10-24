@@ -46,6 +46,12 @@ class Jogo:
         self.palavra_escondida = Palavra(arquivo)
         self.historico_chutes = []
 
+    def novo_jogo(self, arquivo):
+        self.chutes = 0
+        self.vidas = 6
+        self.palavra_escondida = Palavra(arquivo)
+        self.historico_chutes = []
+
     def chutar(self, letra):
         self.chutes += 1
         letra = letra.upper()
@@ -80,7 +86,7 @@ class Jogo:
             return True
         else:
             return False
-
+      
 
 if __name__ == "__main__":
     jogo = Jogo('palavras.txt')
@@ -94,7 +100,10 @@ if __name__ == "__main__":
         jogo.chutar(letra)
         if jogo.ganhou():
             print("Você ficou vivo dessa vez")
+            print("O personagem é: ", jogo.palavra_escondida.palavra_misterio)
+            break
         elif jogo.perdeu():
             print("Chegou a sua hora! MuhHÁhahaHAHAhahá")
             break
+            
     
